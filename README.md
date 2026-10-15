@@ -68,12 +68,7 @@ El orden de la lista es el orden en el carrusel y en Trabajos. Si `demo` es `nul
 
 ### Poner la foto del equipo
 
-Guardar la foto en `src/assets/equipo/` (ej. `equipo.jpg`, vertical 4:5, al menos 1000 px de alto) y en `src/data/equipo.ts`:
-
-```ts
-import foto from '../assets/equipo/equipo.jpg';
-export const fotoEquipo = { src: foto, alt: 'Octavio y … en …' };
-```
+Guardar la foto como `src/assets/phototeam.jpg` (también sirve `.png`, `.webp` o `.avif`; vertical 4:5, al menos 1000 px de alto) y volver a compilar. Aparece sola en el bloque Nosotros, sin tocar código. Si la foto es de una sola persona, ajustar `alt` y `pie` de `fotoEquipo` en `src/data/equipo.ts`.
 
 Las fotos individuales van en el campo `foto` de cada integrante. Sin foto, se muestran las iniciales.
 

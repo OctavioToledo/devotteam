@@ -1,5 +1,4 @@
 // Equipo y foto del bloque "Nosotros".
-// Para poner la foto: guardala en src/assets/equipo/ e importala acá (ver README).
 import type { ImageMetadata } from 'astro';
 
 export type Integrante = {
@@ -11,15 +10,23 @@ export type Integrante = {
 
 export const equipo: Integrante[] = [
   { nombre: 'Octavio Toledo', rol: 'Desarrollo full stack', area: 'desarrollo', foto: null },
-  { nombre: 'Bianca', rol: 'Atención comercial', area: 'comercial', foto: null }, // TODO: apellido y foto
+  { nombre: 'Bianca Toledo', rol: 'Atención comercial', area: 'comercial', foto: null }, // TODO: foto
   // TODO: nombre de la segunda persona del área comercial; descomentar cuando esté.
   // { nombre: '', rol: 'Seguimiento de clientes', area: 'comercial', foto: null },
 ];
 
-// Foto grande del bloque Nosotros (Octavio, o Octavio y su hermana). null = recuadro de espera.
-export const fotoEquipo: { src: ImageMetadata | null; alt: string } = {
-  src: null, // TODO: foto real del equipo
-  alt: 'Octavio Toledo y equipo de Devott en Mendoza',
+// Foto grande del bloque Nosotros. Se toma sola de src/assets/phototeam (.jpg, .jpeg, .png, .webp o .avif).
+// Mientras no exista, se muestra el recuadro "Foto del equipo · Próximamente".
+const fotosEquipo = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/{phototeam,PhotoTeam,photoTeam}.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG}',
+  { eager: true },
+);
+
+export const fotoEquipo: { src: ImageMetadata | null; alt: string; pie: string } = {
+  src: Object.values(fotosEquipo)[0]?.default ?? null,
+  // Ajustar alt y pie si la foto es de una sola persona.
+  alt: 'Octavio y Bianca Toledo, el equipo de Devott, en Mendoza',
+  pie: 'Octavio y Bianca Toledo',
 };
 
 // Video de presentación. Mientras sea null, el espacio queda oculto.

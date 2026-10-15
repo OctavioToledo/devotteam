@@ -1,15 +1,15 @@
 # Lo que falta que provea Octavio
 
 ## Datos
-- [x] Bianca, área comercial.
-- [ ] Apellido de Bianca y nombre de la segunda persona del área comercial → `src/data/equipo.ts` (está comentada; al descomentarla, el texto pasa a plural solo).
+- [x] Bianca Toledo, área comercial.
+- [ ] Nombre de la segunda persona del área comercial, si se suma → `src/data/equipo.ts` (está comentada; al descomentarla, el texto pasa a plural solo).
 - [x] WhatsApp: +54 2634 280036 (`5492634280036` en formato wa.me).
 - [x] Correo: equipodevott@gmail.com.
 - [ ] Usuario de Instagram de Devott → `src/config/site.ts` (`instagram`). Mientras esté vacío, no aparece.
-- [ ] Dominio definitivo → variable `SITE_URL` en Vercel (hoy usa `https://devotteam.vercel.app`).
+- [ ] Dominio definitivo (se compra en estos días) → variable `SITE_URL` en Vercel (hoy usa `https://devotteam.vercel.app`).
 
 ## Fotos
-- [ ] Foto del equipo para el bloque Nosotros (Octavio, o Octavio y su hermana), vertical 4:5.
+- [ ] Foto del equipo: guardarla como `src/assets/phototeam.jpg` (o .png/.webp), vertical 4:5. Aparece sola.
 - [ ] Fotos individuales de cada integrante (opcional, cuadradas).
 - [x] Captura real de un pedido en WhatsApp (Verto's) → `src/assets/pedido-whatsapp.png`.
 - [ ] Rehacer esa captura: el emoji del primer renglón llega roto (`�`). Revisar la codificación del mensaje en Verto's.
