@@ -66,11 +66,9 @@ import nuevoDesktop from '../assets/proyectos/nuevo-desktop.png';
 
 El orden de la lista es el orden en el carrusel y en Trabajos. Si `demo` es `null`, la tarjeta muestra "Pedí la demo" y abre WhatsApp.
 
-### Poner la foto del equipo
+### Cambiar la foto del equipo
 
-Guardar la foto como `src/assets/phototeam.jpg` (también sirve `.png`, `.webp` o `.avif`; vertical 4:5, al menos 1000 px de alto) y volver a compilar. Aparece sola en el bloque Nosotros, sin tocar código. Si la foto es de una sola persona, ajustar `alt` y `pie` de `fotoEquipo` en `src/data/equipo.ts`.
-
-Las fotos individuales van en el campo `foto` de cada integrante. Sin foto, se muestran las iniciales.
+La foto de Nosotros es `src/assets/phototeam.jpeg`. Para cambiarla, reemplazar ese archivo (también sirve `.jpg`, `.png`, `.webp` o `.avif`, vertical) y volver a compilar. Sin foto, aparece un recuadro "Próximamente". La descripción (`alt`) y el pie están en `fotoEquipo`, y la presentación de cada uno (área, nombre y bio) en `equipo`, los dos en `src/data/equipo.ts`.
 
 ### Activar testimonios
 

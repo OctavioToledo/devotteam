@@ -52,7 +52,7 @@ const jsonLd = {
         { '@type': 'Country', name: site.pais },
       ],
       founder: { '@type': 'Person', name: equipo[0].nombre, url: contacto.perfilTecnico },
-      employee: equipo.map((p) => ({ '@type': 'Person', name: p.nombre, jobTitle: p.rol })),
+      employee: equipo.map((p) => ({ '@type': 'Person', name: p.nombre, jobTitle: p.rol, description: p.bio })),
       knowsAbout: ['Desarrollo web', 'Catálogos online', 'Pedidos por WhatsApp', 'Páginas web para emprendedores'],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',

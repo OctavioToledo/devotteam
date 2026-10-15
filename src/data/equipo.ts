@@ -1,18 +1,29 @@
 // Equipo y foto del bloque "Nosotros".
 import type { ImageMetadata } from 'astro';
+import { contacto } from '../config/site';
 
 export type Integrante = {
   nombre: string;
-  rol: string;
-  area: 'desarrollo' | 'comercial';
-  foto: ImageMetadata | null; // null = se muestra un recuadro con las iniciales
+  area: string; // etiqueta corta, en mayúsculas en la página
+  rol: string; // para los datos de Google
+  bio: string; // una o dos líneas
+  link?: { texto: string; url: string };
 };
 
 export const equipo: Integrante[] = [
-  { nombre: 'Octavio Toledo', rol: 'Desarrollo full stack', area: 'desarrollo', foto: null },
-  { nombre: 'Bianca Toledo', rol: 'Atención comercial', area: 'comercial', foto: null }, // TODO: foto
-  // TODO: nombre de la segunda persona del área comercial; descomentar cuando esté.
-  // { nombre: '', rol: 'Seguimiento de clientes', area: 'comercial', foto: null },
+  {
+    nombre: 'Octavio Toledo',
+    area: 'Desarrollo',
+    rol: 'Desarrollador full stack',
+    bio: 'Desarrollador full stack con varios años de experiencia. Diseña y programa cada página a medida.',
+    link: { texto: 'Ver perfil técnico', url: contacto.perfilTecnico },
+  },
+  {
+    nombre: 'Bianca Toledo',
+    area: 'Gestión y ventas',
+    rol: 'Gestión comercial y administración',
+    bio: 'Licenciada en Gestión Ambiental, con experiencia en ventas y administración. Te asesora y sigue tu proyecto de punta a punta.',
+  },
 ];
 
 // Foto grande del bloque Nosotros. Se toma sola de src/assets/phototeam (.jpg, .jpeg, .png, .webp o .avif).
@@ -24,9 +35,8 @@ const fotosEquipo = import.meta.glob<{ default: ImageMetadata }>(
 
 export const fotoEquipo: { src: ImageMetadata | null; alt: string; pie: string } = {
   src: Object.values(fotosEquipo)[0]?.default ?? null,
-  // Ajustar alt y pie si la foto es de una sola persona.
-  alt: 'Octavio y Bianca Toledo, el equipo de Devott, en Mendoza',
-  pie: 'Octavio y Bianca Toledo',
+  alt: 'Octavio y Bianca Toledo, hermanos y fundadores de Devott, tomados del brazo sobre un fondo blanco.',
+  pie: 'Octavio y Bianca · Devott Team',
 };
 
 // Video de presentación. Mientras sea null, el espacio queda oculto.

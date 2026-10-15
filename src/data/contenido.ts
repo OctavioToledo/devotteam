@@ -133,16 +133,8 @@ export const despues = {
 
 export const nosotros = {
   etiqueta: 'Nosotros',
-  titulo: 'Hablás directo con quienes hacen tu página.',
-  // {comercial} se reemplaza por textoComercial, con los nombres del área comercial de equipo.ts.
-  texto:
-    'Devott es un equipo chico de Mendoza. Octavio programa cada página a medida, sin plantillas genéricas ni plataformas que cobran por mes. {comercial}',
-  textoComercial: {
-    una: '{nombres} te atiende, te asesora y acompaña tu proyecto de principio a fin.',
-    varias: '{nombres} te atienden, te asesoran y acompañan tu proyecto de principio a fin.',
-  },
-  cita: 'Cada página la programamos nosotros, para un negocio real, con nombre y apellido.',
-  perfilTecnico: 'Conocé el perfil técnico de Octavio',
+  titulo: 'Somos Octavio y Bianca.',
+  bajada: 'Hermanos, emprendedores y mendocinos. Uno programa, la otra gestiona: hablás directo con quienes hacen tu página.',
 };
 
 export const ctaFinal = {
