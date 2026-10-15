@@ -21,8 +21,8 @@ export const equipo: Integrante[] = [
   {
     nombre: 'Bianca Toledo',
     area: 'Gestión y ventas',
-    rol: 'Gestión comercial y administración',
-    bio: 'Licenciada en Gestión Ambiental, con experiencia en ventas y administración. Te asesora y sigue tu proyecto de punta a punta.',
+    rol: 'Gestión comercial, administración y auditorías',
+    bio: 'Licenciada en Gestión Ambiental, con experiencia en ventas, administración, auditorías y optimización de procesos. Te asesora y acompaña tu proyecto.',
   },
 ];
 
