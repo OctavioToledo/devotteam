@@ -1,0 +1,185 @@
+---
+import { proceso, despues } from '../data/contenido';
+---
+
+<section class="section" id="como-trabajamos" aria-labelledby="proceso-titulo">
+  <div class="container proceso">
+    <div class="section-head proceso__head">
+      <p class="eyebrow reveal">{proceso.etiqueta}</p>
+      <h2 id="proceso-titulo" class="display reveal">{proceso.titulo}</h2>
+      <p class="proceso__cierre reveal">{proceso.cierre}</p>
+    </div>
+
+    <ol class="timeline">
+      {proceso.pasos.map((p, i) => (
+        <li class:list={['tl', 'reveal', i === proceso.pasos.length - 1 && 'tl--last']}>
+          <span class="tl__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3 class="tl__title">{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="section section--alt" id="despues" aria-labelledby="despues-titulo">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow reveal">{despues.etiqueta}</p>
+      <h2 id="despues-titulo" class="display reveal">{despues.titulo}</h2>
+    </div>
+    <ul class="despues">
+      {despues.items.map((d, i) => (
+        <li class:list={['card', 'reveal', i === 0 && 'card--inverse']}>
+          <span class="mono card__n">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="panel-title">{d.titulo}</h3>
+          <p>{d.texto}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .proceso {
+    display: grid;
+    gap: 8px;
+  }
+
+  .proceso__cierre {
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--muted);
+  }
+
+  .timeline {
+    position: relative;
+  }
+
+  .tl {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+    padding-bottom: 28px;
+  }
+
+  .tl::before {
+    content: '';
+    position: absolute;
+    left: 23.5px;
+    top: 48px;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule-strong);
+  }
+
+  .tl--last::before {
+    display: none;
+  }
+
+  .tl__num {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--accent-text);
+  }
+
+  .tl--last .tl__num {
+    background: var(--btn-bg);
+    border-color: var(--btn-bg);
+    color: var(--btn-fg);
+  }
+
+  .tl__title {
+    padding-top: 10px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .tl p {
+    margin-top: 4px;
+    color: var(--muted);
+  }
+
+  .despues {
+    display: grid;
+    gap: 16px;
+  }
+
+  .card {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--rule-strong);
+  }
+
+  .card p {
+    color: var(--muted);
+  }
+
+  .card__n {
+    font-size: 0.75rem;
+    color: var(--accent-text);
+  }
+
+  .card--inverse {
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+    border-color: var(--surface-inverse);
+  }
+
+  .card--inverse p,
+  .card--inverse .card__n {
+    color: color-mix(in srgb, var(--text-inverse) 72%, transparent);
+  }
+
+  @media (min-width: 900px) {
+    .proceso {
+      grid-template-columns: 2fr 3fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .proceso__head {
+      position: sticky;
+      top: calc(var(--header-h) + 32px);
+    }
+
+    .despues {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .card + .card {
+      border-left: 0;
+    }
+
+    .card {
+      padding: 28px 24px;
+      min-height: 260px;
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 899px) {
+    .despues {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

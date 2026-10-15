@@ -1,0 +1,284 @@
+---
+import { Picture } from 'astro:assets';
+import { nosotros } from '../data/contenido';
+import { equipo, fotoEquipo, videoPresentacion } from '../data/equipo';
+import { contacto, site } from '../config/site';
+import Logo from './Logo.astro';
+
+const comercial = equipo.filter((p) => p.area === 'comercial').map((p) => p.nombre);
+const texto = nosotros.texto.replace('{comercial}', comercial.join(' y '));
+const iniciales = (n: string) =>
+  n.startsWith('[')
+    ? '?'
+    : n
+        .split(' ')
+        .map((x) => x[0])
+        .slice(0, 2)
+        .join('');
+---
+
+<section class="section" id="nosotros" aria-labelledby="nosotros-titulo">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow reveal">{nosotros.etiqueta}</p>
+      <h2 id="nosotros-titulo" class="display reveal">{nosotros.titulo}</h2>
+    </div>
+
+    <div class="mosaico reveal">
+      <figure class="cell cell--foto">
+        {fotoEquipo.src ? (
+          <Picture
+            src={fotoEquipo.src}
+            formats={['avif', 'webp']}
+            widths={[400, 640, 900]}
+            sizes="(min-width: 900px) 40vw, 100vw"
+            alt={fotoEquipo.alt}
+            loading="lazy"
+          />
+        ) : (
+          <div class="foto-pendiente">
+            <span class="foto-pendiente__plus" aria-hidden="true">+</span>
+            <span class="mono">Foto del equipo</span>
+            <span class="foto-pendiente__nota">Próximamente</span>
+          </div>
+        )}
+        <figcaption class="mono cell--foto__cap">Octavio Toledo · {site.ciudad}</figcaption>
+      </figure>
+
+      <div class="cell cell--texto">
+        <p class="cita">“{nosotros.cita}”</p>
+        <p class="texto">{texto}</p>
+        <a href={contacto.perfilTecnico} target="_blank" rel="noopener" class="link-mono">
+          {nosotros.perfilTecnico}
+          <span class="sr-only">(se abre en una pestaña nueva)</span>
+        </a>
+      </div>
+
+      <ul class="cell cell--equipo" aria-label="Equipo">
+        {equipo.map((p) => (
+          <li class="persona">
+            {p.foto ? (
+              <Picture src={p.foto} formats={['avif', 'webp']} widths={[96, 192]} sizes="56px" alt="" class="persona__foto" loading="lazy" />
+            ) : (
+              <span class="persona__ini" aria-hidden="true">{iniciales(p.nombre)}</span>
+            )}
+            <div>
+              <p class="persona__nombre">{p.nombre}</p>
+              <p class="mono persona__rol">{p.rol}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="cell cell--marca">
+        <Logo />
+        <p class="mono">{site.firma} · {site.bajada}</p>
+        <p class="mono">{site.ciudad}, {site.pais}</p>
+      </div>
+    </div>
+
+    {videoPresentacion && (
+      <div class="video reveal">
+        <iframe
+          src={videoPresentacion.url}
+          title={videoPresentacion.titulo}
+          loading="lazy"
+          allow="encrypted-media; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .mosaico {
+    display: grid;
+    border: 1px solid var(--rule-strong);
+  }
+
+  .cell {
+    padding: 20px;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .cell:last-child {
+    border-bottom: 0;
+  }
+
+  .cell--foto {
+    position: relative;
+    padding: 0;
+    aspect-ratio: 4 / 5;
+    background: var(--bg-sky);
+    overflow: hidden;
+  }
+
+  .cell--foto :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cell--foto__cap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 10px 12px;
+    background: var(--surface);
+    border-top: 1px solid var(--rule-strong);
+    border-right: 1px solid var(--rule-strong);
+    font-size: 0.6875rem;
+  }
+
+  .foto-pendiente {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 8px;
+    height: 100%;
+    margin: 16px;
+    height: calc(100% - 32px);
+    border: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+    font-size: 0.75rem;
+    color: var(--text);
+  }
+
+  .foto-pendiente__plus {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .foto-pendiente__nota {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .cell--texto {
+    display: grid;
+    align-content: start;
+    gap: 20px;
+    background: var(--surface);
+  }
+
+  .cita {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .texto {
+    color: var(--muted);
+    max-width: 60ch;
+  }
+
+  .cell--texto .link-mono {
+    justify-self: start;
+  }
+
+  .cell--equipo {
+    display: grid;
+    gap: 16px;
+    background: var(--bg-alt);
+  }
+
+  .persona {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .persona__ini,
+  .persona :global(.persona__foto) {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+  }
+
+  .persona__ini {
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--rule-strong);
+    background: var(--surface);
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--accent-text);
+  }
+
+  .persona__nombre {
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .persona__rol {
+    margin-top: 2px;
+    font-size: 0.6875rem;
+    color: var(--muted);
+  }
+
+  .cell--marca {
+    display: grid;
+    align-content: space-between;
+    gap: 16px;
+    min-height: 180px;
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+    font-size: 0.6875rem;
+    --logo-accent: #8b9bff;
+  }
+
+  .cell--marca p {
+    opacity: 0.75;
+  }
+
+  .video {
+    margin-top: 24px;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--rule-strong);
+  }
+
+  .video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media (min-width: 900px) {
+    .mosaico {
+      grid-template-columns: 5fr 4fr 3fr;
+      grid-template-rows: auto auto;
+    }
+
+    .cell {
+      border-bottom: 0;
+      padding: 28px;
+    }
+
+    .cell--foto {
+      grid-row: 1 / 3;
+      aspect-ratio: auto;
+      min-height: 560px;
+      border-right: 1px solid var(--rule-strong);
+      padding: 0;
+    }
+
+    .cell--texto {
+      grid-column: 2 / 4;
+      border-bottom: 1px solid var(--rule-strong);
+    }
+
+    .cell--equipo {
+      border-right: 1px solid var(--rule-strong);
+    }
+  }
+</style>

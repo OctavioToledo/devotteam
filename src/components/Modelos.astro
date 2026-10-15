@@ -1,0 +1,170 @@
+---
+import { modelos as texto } from '../data/contenido';
+import { modelos } from '../data/modelos';
+import { proyectos } from '../data/proyectos';
+import { mensajes } from '../config/site';
+import Icon from './Icon.astro';
+import WaLink from './WaLink.astro';
+
+const conDemo = modelos.map((m) => ({ ...m, demo: proyectos.find((p) => p.nombre === m.proyecto)?.demo ?? null }));
+---
+
+<section class="section section--alt" id="modelos" aria-labelledby="modelos-titulo">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow reveal">{texto.etiqueta}</p>
+      <h2 id="modelos-titulo" class="display reveal">{texto.titulo}</h2>
+      <p class="lead reveal">{texto.bajada}</p>
+    </div>
+
+    <ul class="modelos">
+      {conDemo.map((m, i) => (
+        <li class="modelo reveal">
+          <div class:list={['modelo__head', i === 0 && 'modelo__head--inverse']}>
+            <span class="mono">Modelo {String(i + 1).padStart(2, '0')}</span>
+            <h3 class="modelo__name">{m.nombre}</h3>
+          </div>
+          <dl class="modelo__dl">
+            <div><dt class="mono">Estilo</dt><dd>{m.estilo}</dd></div>
+            <div><dt class="mono">Funciones destacadas</dt><dd>{m.funciones}</dd></div>
+            <div><dt class="mono">Ideal para</dt><dd>{m.idealPara}</dd></div>
+          </dl>
+          <div class="modelo__actions">
+            {m.demo && (
+              <a href={m.demo} target="_blank" rel="noopener" class="link-mono" data-demo={m.nombre}>
+                Probar demo <span class="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+            )}
+            <WaLink origen="modelo" detalle={m.nombre} mensaje={mensajes.modelo(m.nombre)} class="btn btn--outline">
+              Quiero este modelo
+            </WaLink>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="rubros reveal">
+      <ul class="rubros__list" aria-label="Rubros">
+        {texto.rubros.map((r) => <li class="chip">{r}</li>)}
+      </ul>
+      <p>{texto.rubrosFrase}</p>
+    </div>
+
+    <p class="destacado reveal">
+      <Icon name="celular" size={24} />
+      <span>{texto.destacado}</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .modelos {
+    display: grid;
+    gap: 16px;
+  }
+
+  .modelo {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    border: 1px solid var(--rule-strong);
+    background: var(--surface);
+  }
+
+  .modelo__head {
+    display: grid;
+    gap: 6px;
+    padding: 20px;
+    border-bottom: 1px solid var(--rule-strong);
+    font-size: 0.75rem;
+    color: var(--accent-text);
+  }
+
+  .modelo__head--inverse {
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+  }
+
+  .modelo__head--inverse .mono {
+    opacity: 0.75;
+  }
+
+  .modelo__name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.05;
+    color: var(--text);
+  }
+
+  .modelo__head--inverse .modelo__name {
+    color: var(--text-inverse);
+  }
+
+  .modelo__dl {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .modelo__dl dt {
+    font-size: 0.6875rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .modelo__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 20px 20px;
+  }
+
+  .modelo__actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .rubros {
+    display: grid;
+    gap: 12px;
+    margin-top: 40px;
+  }
+
+  .rubros__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .rubros p {
+    color: var(--muted);
+  }
+
+  .destacado {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--gradient-ledger);
+    color: #ffffff;
+    font-size: 1.0625rem;
+  }
+
+  .destacado :global(svg) {
+    flex: none;
+  }
+
+  @media (min-width: 900px) {
+    .modelos {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .modelo + .modelo {
+      border-left: 0;
+    }
+  }
+</style>

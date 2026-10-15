@@ -1,0 +1,236 @@
+---
+import { Picture } from 'astro:assets';
+import { trabajos } from '../data/contenido';
+import { proyectos, estadoEtiqueta } from '../data/proyectos';
+import Icon from './Icon.astro';
+import WaLink from './WaLink.astro';
+
+const lista = proyectos.filter((p) => p.enTrabajos);
+---
+
+<section class="section" id="trabajos" aria-labelledby="trabajos-titulo">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow reveal">{trabajos.etiqueta}</p>
+      <h2 id="trabajos-titulo" class="display reveal">{trabajos.titulo}</h2>
+      <p class="lead reveal">{trabajos.bajada}</p>
+    </div>
+
+    <ul class="trabajos">
+      {lista.map((p) => (
+        <li class="trabajo reveal">
+          <div class="trabajo__img">
+            {p.capturas ? (
+              <Picture
+                src={p.capturas.mobile}
+                formats={['avif', 'webp']}
+                widths={[320, 480, 640]}
+                sizes="(min-width: 900px) 280px, (min-width: 600px) 45vw, 90vw"
+                alt={`Captura de la página de ${p.nombre} en el celular`}
+                loading="lazy"
+              />
+            ) : (
+              <div class="trabajo__wip mono" aria-hidden="true">
+                <span>+</span>
+                Capturas próximamente
+              </div>
+            )}
+          </div>
+
+          <div class="trabajo__body">
+            <div class="trabajo__head">
+              <span class:list={['mono', 'estado', `estado--${p.estado}`]}>{estadoEtiqueta[p.estado]}</span>
+              <h3 class="trabajo__name">{p.nombre}</h3>
+              <p class="mono trabajo__rubro">{p.rubro}</p>
+            </div>
+
+            <dl class="trabajo__dl">
+              <div>
+                <dt class="mono">Qué necesitaba</dt>
+                <dd>{p.necesidad}</dd>
+              </div>
+              <div>
+                <dt class="mono">Qué hicimos</dt>
+                <dd>{p.solucion}</dd>
+              </div>
+            </dl>
+
+            <ul class="trabajo__tags" aria-label="Funciones">
+              {p.funciones.map((f) => <li class="chip">{f}</li>)}
+            </ul>
+
+            <div class="trabajo__cta">
+              {p.demo ? (
+                <a href={p.demo} target="_blank" rel="noopener" class="btn btn--primary" data-demo={p.nombre}>
+                  Ver demo en vivo <Icon name="externo" />
+                  <span class="sr-only">(se abre en una pestaña nueva)</span>
+                </a>
+              ) : p.estado === 'en-desarrollo' ? (
+                <span class="trabajo__nota">Todavía no tiene demo pública.</span>
+              ) : (
+                <WaLink
+                  origen="proyecto"
+                  detalle={p.nombre}
+                  mensaje={`Hola Devott! ¿Me pasan la demo de ${p.nombre} para probarla?`}
+                  class="btn btn--outline"
+                >
+                  Pedí la demo
+                </WaLink>
+              )}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trabajos {
+    display: grid;
+    gap: 24px;
+  }
+
+  .trabajo {
+    display: grid;
+    border: 1px solid var(--rule-strong);
+    background: var(--surface);
+  }
+
+  .trabajo__img {
+    display: grid;
+    place-items: end center;
+    height: 300px;
+    padding: 24px 24px 0;
+    overflow: hidden;
+    background-color: var(--bg-sky);
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .trabajo__img :global(img) {
+    width: 220px;
+    height: 276px;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--rule-strong);
+    border-bottom: 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .trabajo__wip {
+    align-self: center;
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .trabajo__wip span {
+    font-size: 2rem;
+    color: var(--accent);
+  }
+
+  .trabajo__body {
+    display: grid;
+    align-content: start;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .trabajo__head {
+    display: grid;
+    gap: 6px;
+  }
+
+  .estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.6875rem;
+    color: var(--muted);
+  }
+
+  .estado::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #1f9d61;
+  }
+
+  .estado--modelo::before { background: var(--accent); }
+  .estado--en-desarrollo::before { background: #d39500; }
+
+  .trabajo__name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.05;
+  }
+
+  .trabajo__rubro {
+    font-size: 0.75rem;
+    color: var(--accent-text);
+  }
+
+  .trabajo__dl {
+    display: grid;
+    gap: 14px;
+  }
+
+  .trabajo__dl dt {
+    font-size: 0.6875rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .trabajo__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .trabajo__cta {
+    padding-top: 4px;
+  }
+
+  .trabajo__cta .btn {
+    width: 100%;
+  }
+
+  .trabajo__nota {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 900px) {
+    .trabajos {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .trabajo {
+      grid-template-columns: 260px 1fr;
+    }
+
+    .trabajo__img {
+      height: auto;
+      min-height: 100%;
+      border-bottom: 0;
+      border-right: 1px solid var(--rule-strong);
+      place-items: end center;
+    }
+
+    .trabajo__img :global(img) {
+      width: 200px;
+      height: 360px;
+    }
+
+    .trabajo__cta .btn {
+      width: auto;
+    }
+  }
+</style>

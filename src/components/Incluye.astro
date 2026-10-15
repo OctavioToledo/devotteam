@@ -1,0 +1,94 @@
+---
+import { incluye } from '../data/contenido';
+import Icon from './Icon.astro';
+---
+
+<section class="section" id="incluye" aria-labelledby="incluye-titulo">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow reveal">{incluye.etiqueta}</p>
+      <h2 id="incluye-titulo" class="display reveal">{incluye.titulo}</h2>
+    </div>
+
+    <ul class="incluye">
+      {incluye.items.map((it) => (
+        <li class="item reveal">
+          <Icon name="check" size={20} class="item__icon" />
+          <div>
+            <h3 class="item__title">{it.titulo}</h3>
+            <p>{it.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="extra reveal">
+      <h3 class="mono extra__title">{incluye.despues.titulo}</h3>
+      <ul class="extra__list">
+        {incluye.despues.items.map((x) => <li class="chip">{x}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .incluye {
+    display: grid;
+    border-top: 1px solid var(--rule);
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .item :global(.item__icon) {
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  .item__title {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .item p {
+    margin-top: 4px;
+    color: var(--muted);
+  }
+
+  .extra {
+    display: grid;
+    gap: 16px;
+    margin-top: 40px;
+    padding: 20px;
+    background: var(--bg-alt);
+    border: 1px solid var(--rule-strong);
+  }
+
+  .extra__title {
+    font-size: 0.75rem;
+    color: var(--accent-text);
+  }
+
+  .extra__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (min-width: 768px) {
+    .incluye {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+    }
+
+    .item:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

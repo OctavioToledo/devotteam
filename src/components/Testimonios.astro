@@ -1,0 +1,57 @@
+---
+// Desactivado hasta tener testimonios reales: se activa desde src/data/equipo.ts.
+import { testimonios } from '../data/equipo';
+
+const visible = testimonios.activo && testimonios.items.length > 0;
+---
+
+{visible && (
+  <section class="section section--alt" id="testimonios" aria-labelledby="testimonios-titulo">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Clientes</p>
+        <h2 id="testimonios-titulo" class="display">Lo que dicen quienes ya tienen su página.</h2>
+      </div>
+      <ul class="testimonios">
+        {testimonios.items.map((t) => (
+          <li class="testimonio reveal">
+            <blockquote>“{t.texto}”</blockquote>
+            <p class="mono">{t.nombre} · {t.negocio}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .testimonios {
+    display: grid;
+    gap: 16px;
+  }
+
+  .testimonio {
+    display: grid;
+    gap: 16px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--rule-strong);
+  }
+
+  blockquote {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .testimonio .mono {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 900px) {
+    .testimonios {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

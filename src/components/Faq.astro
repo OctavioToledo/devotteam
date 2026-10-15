@@ -1,0 +1,108 @@
+---
+import { faq } from '../data/faq';
+import Icon from './Icon.astro';
+---
+
+<section class="section section--alt" id="preguntas" aria-labelledby="faq-titulo">
+  <div class="container faq">
+    <div class="section-head">
+      <p class="eyebrow reveal">Preguntas frecuentes</p>
+      <h2 id="faq-titulo" class="display reveal">Lo que nos preguntan antes de empezar.</h2>
+    </div>
+
+    <div class="acordeon reveal" data-accordion>
+      {faq.map((f, i) => (
+        <div class="q">
+          <h3>
+            <button
+              type="button"
+              class="q__btn"
+              id={`faq-btn-${i}`}
+              aria-expanded="false"
+              aria-controls={`faq-panel-${i}`}
+            >
+              <span>{f.pregunta}</span>
+              <Icon name="mas" size={20} class="q__icon" />
+            </button>
+          </h3>
+          <div class="q__panel" id={`faq-panel-${i}`} role="region" aria-labelledby={`faq-btn-${i}`} hidden>
+            <p>{f.respuesta}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .acordeon {
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .q {
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .q__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    min-height: 64px;
+    padding: 18px 0;
+    background: none;
+    border: 0;
+    text-align: left;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.35;
+    cursor: pointer;
+  }
+
+  .q__btn:hover span {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+
+  .q__btn :global(.q__icon) {
+    flex: none;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+  }
+
+  .q__btn[aria-expanded='true'] :global(.q__icon) {
+    transform: rotate(45deg);
+  }
+
+  .q__panel {
+    padding: 0 40px 20px 0;
+    color: var(--muted);
+    max-width: 70ch;
+  }
+
+  @media (min-width: 900px) {
+    .faq {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .q__btn {
+      font-size: 1.1875rem;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-accordion] .q__btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      const panel = document.getElementById(btn.getAttribute('aria-controls')!);
+      if (panel) panel.hidden = open;
+    });
+  });
+</script>

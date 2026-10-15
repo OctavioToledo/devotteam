@@ -1,0 +1,86 @@
+---
+import { site, contacto, instagramLink, waLink } from '../config/site';
+import Logo from './Logo.astro';
+
+const ig = instagramLink();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <Logo />
+      <p class="mono">{site.firma} · {site.bajada}</p>
+      <p>{site.ciudad}, {site.pais}</p>
+    </div>
+
+    <ul class="footer__list" aria-label="Contacto">
+      <li><a href={waLink()} target="_blank" rel="noopener" data-wa="footer">WhatsApp {contacto.whatsappVisible}</a></li>
+      <li><a href={`mailto:${contacto.email}`}>{contacto.email}</a></li>
+      {ig ? (
+        <li><a href={ig} target="_blank" rel="noopener">Instagram @{contacto.instagram}</a></li>
+      ) : null}
+    </ul>
+
+    <p class="footer__copy mono">© 2026 {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 48px 0 calc(48px + 72px);
+    background: var(--bg);
+    border-top: 1px solid var(--rule);
+    font-size: 0.9375rem;
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: 28px;
+  }
+
+  .footer__brand {
+    display: grid;
+    gap: 10px;
+  }
+
+  .footer__brand .mono,
+  .footer__copy {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer__brand p:last-child {
+    color: var(--muted);
+  }
+
+  .footer__list {
+    display: grid;
+    gap: 4px;
+  }
+
+  .footer__list a {
+    display: inline-block;
+    padding: 8px 0;
+    text-decoration: none;
+  }
+
+  .footer__list a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .footer {
+      padding-bottom: 48px;
+    }
+
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1fr;
+      align-items: start;
+    }
+
+    .footer__copy {
+      justify-self: end;
+    }
+  }
+</style>

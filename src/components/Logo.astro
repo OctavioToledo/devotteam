@@ -1,0 +1,31 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span class:list={['logo', className]}>
+  <svg class="logo__mark" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">
+    <rect x="0.5" y="0.5" width="27" height="27" rx="4" fill="none" stroke="currentColor" />
+    <path d="M8 7h5.5a7 7 0 0 1 0 14H8z" fill="none" stroke="currentColor" stroke-width="1.6" />
+    <path d="M18.5 14h4" stroke="var(--logo-accent, #384ce3)" stroke-width="1.6" />
+  </svg>
+  <span class="logo__word">Devott</span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo__word {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+</style>

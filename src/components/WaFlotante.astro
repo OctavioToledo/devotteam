@@ -1,0 +1,77 @@
+---
+import WaLink from './WaLink.astro';
+---
+
+<div class="wa-float">
+  <WaLink origen="flotante" class="wa-float__btn" aria-label="Escribinos por WhatsApp">
+    <span class="wa-float__label">WhatsApp</span>
+  </WaLink>
+</div>
+
+<style>
+  .wa-float {
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    z-index: 40;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s;
+  }
+
+  /* En el hero ya hay botones de WhatsApp: el flotante aparece al bajar. */
+  :global(body:not(.past-hero)) .wa-float {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+  }
+
+  :global(.no-js) .wa-float {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .wa-float :global(.wa-float__btn) {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 56px;
+    padding: 0 16px;
+    background: #128c4b;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .wa-float :global(.wa-float__btn:hover) {
+    background: #0e7a40;
+  }
+
+  .wa-float :global(svg) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .wa-float__label {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .wa-float {
+      right: 24px;
+      bottom: 24px;
+    }
+
+    .wa-float__label {
+      display: inline;
+    }
+  }
+</style>

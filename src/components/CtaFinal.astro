@@ -1,0 +1,99 @@
+---
+import { ctaFinal } from '../data/contenido';
+import { contacto, instagramLink } from '../config/site';
+import Icon from './Icon.astro';
+import WaLink from './WaLink.astro';
+
+const ig = instagramLink();
+---
+
+<section class="cta field-dark" id="contacto" aria-labelledby="cta-titulo">
+  <span class="plus plus--a" aria-hidden="true">+</span>
+  <span class="plus plus--b" aria-hidden="true">+</span>
+  <div class="container cta__inner">
+    <p class="eyebrow cta__eyebrow reveal">{ctaFinal.etiqueta}</p>
+    <h2 id="cta-titulo" class="cta__title reveal">{ctaFinal.titulo}</h2>
+    <WaLink origen="cta-final" class="btn btn--light cta__btn reveal">{ctaFinal.boton}</WaLink>
+    <ul class="cta__alt reveal">
+      <li>
+        <a href={`mailto:${contacto.email}`}><Icon name="mail" size={18} />{contacto.email}</a>
+      </li>
+      {ig && (
+        <li>
+          <a href={ig} target="_blank" rel="noopener"><Icon name="instagram" size={18} />@{contacto.instagram}</a>
+        </li>
+      )}
+      <li>
+        <span><Icon name="whatsapp" size={18} />{contacto.whatsappVisible}</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: clamp(80px, 12vw, 160px);
+    overflow: hidden;
+  }
+
+  .plus {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .plus--a { top: 32px; left: 10%; }
+  .plus--b { bottom: 40px; right: 12%; }
+
+  .cta__inner {
+    display: grid;
+    justify-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .cta__eyebrow {
+    color: #c4f0ff;
+  }
+
+  .cta__title {
+    max-width: 16ch;
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    font-weight: 500;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  :global(.cta__btn) {
+    width: 100%;
+    max-width: 420px;
+    min-height: 60px;
+    font-size: 1rem;
+  }
+
+  .cta__alt {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .cta__alt a,
+  .cta__alt span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    text-decoration: none;
+  }
+
+  .cta__alt a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

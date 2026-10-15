@@ -1,0 +1,29 @@
+---
+// Enlace a WhatsApp. `origen` se registra en la analítica (hero, plan, modelo, flotante, cta-final…).
+import { waLink } from '../config/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  origen: string;
+  mensaje?: string;
+  detalle?: string;
+  class?: string;
+  icono?: boolean;
+  'aria-label'?: string;
+}
+
+const { origen, mensaje, detalle, class: className = 'btn btn--primary', icono = true, ...rest } = Astro.props;
+---
+
+<a
+  href={waLink(mensaje)}
+  class={className}
+  target="_blank"
+  rel="noopener"
+  data-wa={origen}
+  data-wa-detalle={detalle}
+  {...rest}
+>
+  {icono && <Icon name="whatsapp" />}
+  <slot />
+</a>

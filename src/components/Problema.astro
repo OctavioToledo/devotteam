@@ -1,0 +1,55 @@
+---
+import { problema } from '../data/contenido';
+---
+
+<section class="section problema" aria-labelledby="problema-titulo">
+  <div class="container problema__grid">
+    <p class="eyebrow reveal">{problema.etiqueta}</p>
+    <div class="problema__body">
+      <h2 id="problema-titulo" class="display reveal">
+        {problema.preguntas.map((q) => <span class="q">{q}</span>)}
+      </h2>
+      <p class="lead reveal">{problema.texto}</p>
+      <p class="problema__cierre reveal">{problema.cierre}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problema__grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  .problema__body {
+    display: grid;
+    gap: 24px;
+  }
+
+  .q {
+    display: block;
+  }
+
+  .q + .q {
+    margin-top: 0.35em;
+    color: var(--muted);
+  }
+
+  .problema__cierre {
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--accent-text);
+  }
+
+  @media (min-width: 900px) {
+    .problema__grid {
+      grid-template-columns: 1fr 3fr;
+      gap: 48px;
+      align-items: start;
+    }
+  }
+</style>

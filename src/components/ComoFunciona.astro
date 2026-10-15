@@ -1,0 +1,172 @@
+---
+import { comoFunciona } from '../data/contenido';
+import Icon from './Icon.astro';
+---
+
+<section class="section section--alt" id="servicio" aria-labelledby="funciona-titulo">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow reveal">{comoFunciona.etiqueta}</p>
+      <h2 id="funciona-titulo" class="display reveal">{comoFunciona.titulo}</h2>
+    </div>
+
+    <div class="funciona">
+      <ol class="pasos">
+        {comoFunciona.pasos.map((p, i) => (
+          <li class="paso reveal">
+            <div class="paso__top">
+              <span class="paso__icon"><Icon name={p.icono as 'celular' | 'carrito' | 'mensaje'} size={24} /></span>
+              <span class="mono paso__num">Paso {String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <h3 class="panel-title">{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </li>
+        ))}
+      </ol>
+
+      <!-- TODO: reemplazar por una captura real del mensaje que llega a WhatsApp. -->
+      <figure class="chat reveal">
+        <figcaption class="mono chat__cap">
+          {comoFunciona.mensajeEjemplo.titulo}
+          <span>Ejemplo</span>
+        </figcaption>
+        <div class="chat__body">
+          <div class="chat__bubble">
+            {comoFunciona.mensajeEjemplo.lineas.map((l) => <p>{l}</p>)}
+          </div>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .funciona {
+    display: grid;
+    gap: 24px;
+  }
+
+  .pasos {
+    display: grid;
+    border: 1px solid var(--rule-strong);
+  }
+
+  .paso {
+    display: grid;
+    gap: 12px;
+    padding: 20px;
+    background: var(--surface);
+  }
+
+  .paso + .paso {
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .paso p {
+    color: var(--muted);
+  }
+
+  .paso__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .paso__icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    color: var(--accent);
+  }
+
+  .paso__num {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .paso:first-child {
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+  }
+
+  .paso:first-child p,
+  .paso:first-child .paso__num {
+    color: color-mix(in srgb, var(--text-inverse) 72%, transparent);
+  }
+
+  .paso:first-child .paso__icon {
+    border-color: color-mix(in srgb, var(--text-inverse) 30%, transparent);
+    color: var(--text-inverse);
+  }
+
+  .chat {
+    border: 1px solid var(--rule-strong);
+    background: var(--surface);
+  }
+
+  .chat__cap {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule-strong);
+    font-size: 0.75rem;
+  }
+
+  .chat__cap span {
+    color: var(--muted);
+  }
+
+  .chat__body {
+    padding: 24px 16px;
+    background-color: var(--bg-alt);
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .chat__bubble {
+    max-width: 280px;
+    margin-left: auto;
+    padding: 14px 16px;
+    background: #dcf8c6;
+    color: #111b21;
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  .chat__bubble p:first-child {
+    margin-bottom: 6px;
+  }
+
+  .chat__bubble p:nth-last-child(2) {
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  @media (min-width: 900px) {
+    .funciona {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+
+    .pasos {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .paso + .paso {
+      border-top: 0;
+      border-left: 1px solid var(--rule-strong);
+    }
+
+    .paso {
+      padding: 28px 24px;
+      align-content: start;
+    }
+  }
+</style>

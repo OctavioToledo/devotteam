@@ -1,0 +1,322 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import WaLink from './WaLink.astro';
+
+const links = [
+  { href: '#trabajos', label: 'Trabajos' },
+  { href: '#servicio', label: 'Servicio' },
+  { href: '#como-trabajamos', label: 'Cómo trabajamos' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#preguntas', label: 'Preguntas' },
+];
+---
+
+<header class="header" data-header>
+  <div class="header__bar container">
+    <a href="#inicio" class="header__logo" aria-label="Devott, ir al inicio">
+      <Logo />
+    </a>
+
+    <nav class="header__nav" aria-label="Principal">
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="Cambiar a tema oscuro">
+        <Icon name="luna" class="theme-icon theme-icon--moon" />
+        <Icon name="sol" class="theme-icon theme-icon--sun" />
+      </button>
+      <WaLink origen="header" class="btn btn--header header__cta">Escribinos</WaLink>
+      <button
+        type="button"
+        class="icon-btn header__burger"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+        aria-label="Abrir menú"
+        data-menu-toggle
+      >
+        <Icon name="menu" class="burger-open" />
+        <Icon name="cerrar" class="burger-close" />
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-mobile" id="menu-mobile" hidden data-menu>
+    <nav aria-label="Principal (celular)">
+      <ul>
+        {links.map((l) => <li><a href={l.href} data-menu-link>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <WaLink origen="menu-mobile" class="btn btn--primary menu-mobile__cta">Escribinos por WhatsApp</WaLink>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .header.is-solid,
+  .header.is-open {
+    background: var(--header-bg);
+    color: var(--text);
+    border-bottom-color: var(--rule);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  }
+
+  .header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: var(--header-h);
+  }
+
+  .header__logo {
+    text-decoration: none;
+    border-radius: var(--radius);
+    --logo-accent: #8b9bff;
+  }
+
+  .header.is-solid .header__logo,
+  .header.is-open .header__logo {
+    --logo-accent: var(--accent);
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__nav ul {
+    display: flex;
+    gap: 4px;
+  }
+
+  .header__nav a {
+    display: inline-block;
+    padding: 10px 12px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius);
+    opacity: 0.86;
+  }
+
+  .header__nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid currentColor;
+    border-color: color-mix(in srgb, currentColor 35%, transparent);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+
+  .icon-btn:hover {
+    border-color: currentColor;
+  }
+
+  :global(.btn--header) {
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 0.8125rem;
+    background: #ffffff;
+    color: #09234f;
+  }
+
+  :global(.btn--header:hover) {
+    background: #c4f0ff;
+  }
+
+  .header.is-solid :global(.btn--header),
+  .header.is-open :global(.btn--header) {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+  }
+
+  .header.is-solid :global(.btn--header:hover) {
+    background: var(--btn-bg-hover);
+  }
+
+  .header__cta {
+    display: none;
+  }
+
+  /* Ícono del tema según el tema activo */
+  .icon-btn :global(.theme-icon--sun) {
+    display: none;
+  }
+
+  :global(:root[data-theme='dark']) .icon-btn :global(.theme-icon--sun) {
+    display: block;
+  }
+
+  :global(:root[data-theme='dark']) .icon-btn :global(.theme-icon--moon) {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .icon-btn :global(.theme-icon--sun) {
+      display: block;
+    }
+
+    :global(:root:not([data-theme='light'])) .icon-btn :global(.theme-icon--moon) {
+      display: none;
+    }
+  }
+
+  .icon-btn :global(.burger-close) {
+    display: none;
+  }
+
+  .header.is-open .icon-btn :global(.burger-close) {
+    display: block;
+  }
+
+  .header.is-open .icon-btn :global(.burger-open) {
+    display: none;
+  }
+
+  .menu-mobile {
+    height: calc(100dvh - var(--header-h));
+    padding: 24px var(--gutter) 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--bg);
+    border-top: 1px solid var(--rule);
+    overflow-y: auto;
+  }
+
+  .menu-mobile[hidden] {
+    display: none;
+  }
+
+  .menu-mobile li {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .menu-mobile a:not(.btn) {
+    display: block;
+    padding: 18px 0;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.1;
+    text-decoration: none;
+  }
+
+  .menu-mobile__cta {
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  @media (min-width: 560px) {
+    .header__cta {
+      display: inline-flex;
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .header__nav {
+      display: block;
+    }
+
+    .header__burger {
+      display: none;
+    }
+
+    .menu-mobile {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const hero = document.querySelector('[data-hero]');
+
+  // El header es transparente sobre el hero y sólido sobre el resto.
+  if (hero && 'IntersectionObserver' in window) {
+    const headerH = () => header.offsetHeight;
+    new IntersectionObserver(([e]) => {
+      header.classList.toggle('is-solid', !e.isIntersecting);
+      document.body.classList.toggle('past-hero', !e.isIntersecting);
+    }, {
+      rootMargin: `-${headerH()}px 0px 0px 0px`,
+    }).observe(hero);
+  } else {
+    header.classList.add('is-solid');
+    document.body.classList.add('past-hero');
+  }
+
+  // Menú del celular
+  const toggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]')!;
+  const menu = header.querySelector<HTMLElement>('[data-menu]')!;
+
+  const setMenu = (open: boolean) => {
+    menu.hidden = !open;
+    header.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) menu.querySelector<HTMLElement>('a')?.focus();
+  };
+
+  toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      toggle.focus();
+    }
+  });
+  matchMedia('(min-width: 1080px)').addEventListener('change', (e) => e.matches && setMenu(false));
+
+  // Tema claro / oscuro
+  const themeBtn = header.querySelector<HTMLButtonElement>('[data-theme-toggle]')!;
+  const root = document.documentElement;
+  const isDark = () =>
+    root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const syncLabel = () =>
+    themeBtn.setAttribute('aria-label', isDark() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+
+  syncLabel();
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('devott-tema', next);
+    } catch {}
+    syncLabel();
+  });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncLabel);
+</script>

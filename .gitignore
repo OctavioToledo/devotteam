@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.*
+!.env.example
+raw-shots/
+# Material comercial interno (incluye precios): no se publica en el repo
+docs/*.pdf
