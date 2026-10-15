@@ -16,8 +16,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
   <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="eyebrow hero__eyebrow">{hero.etiqueta}</p>
-      <h1 id="hero-titulo" class="hero__title">{hero.titulo}</h1>
+      <h1 id="hero-titulo" class="hero__h1">
+        <span class="eyebrow hero__eyebrow">{hero.etiqueta}</span><span class="sr-only">: </span>
+        <span class="hero__title">{hero.titulo}</span>
+      </h1>
       <p class="hero__lead">{hero.bajada}</p>
       <div class="hero__actions">
         <a href="#trabajos" class="btn btn--light">Probá una demo <Icon name="flecha" /></a>
@@ -138,7 +140,14 @@ const pad = (n: number) => String(n).padStart(2, '0');
     color: #c4f0ff;
   }
 
+  .hero__h1 {
+    display: grid;
+    justify-items: start;
+    font-weight: inherit;
+  }
+
   .hero__title {
+    display: block;
     margin-top: 20px;
     font-family: var(--font-display);
     font-weight: 500;
@@ -152,7 +161,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     margin-top: 20px;
     max-width: 52ch;
     font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
-    line-height: 1.45;
+    line-height: 1.55;
     color: rgba(255, 255, 255, 0.82);
   }
 
@@ -207,7 +216,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     gap: 8px;
     padding: 8px 8px 8px 16px;
     border-bottom: 1px solid rgba(196, 240, 255, 0.3);
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: #c4f0ff;
   }
 
@@ -306,7 +315,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     border: 1px dashed rgba(255, 255, 255, 0.6);
     border-bottom: 0;
     color: #ffffff;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 
   .wip-grid {
@@ -354,7 +363,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
   .slide__rubro {
     margin-top: 4px;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.72);
   }
 
@@ -364,7 +373,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     align-items: center;
     gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     text-align: left;

@@ -115,8 +115,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.0625rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -150,6 +150,13 @@ ul,
 ol {
   padding: 0;
   list-style: none;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 
 a {
@@ -218,13 +225,13 @@ button {
 /* Tipografía */
 .eyebrow {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.15;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent-text);
 }
@@ -245,8 +252,8 @@ button {
 }
 
 .lead {
-  font-size: clamp(1.075rem, 1rem + 0.35vw, 1.25rem);
-  line-height: 1.45;
+  font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  line-height: 1.55;
   letter-spacing: -0.009em;
   color: var(--muted);
   max-width: 62ch;
@@ -270,6 +277,7 @@ button {
 .mono {
   font-family: var(--font-mono);
   font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -367,7 +375,7 @@ button {
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   text-transform: uppercase;
   color: var(--text);

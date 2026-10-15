@@ -1,7 +1,7 @@
 // Textos editables de la página. Cambiar acá no requiere tocar componentes.
 
 export const hero = {
-  etiqueta: 'Páginas web para emprendedores',
+  etiqueta: 'Páginas web para emprendedores en Mendoza',
   titulo: 'Tu catálogo online, con pedidos directo a tu WhatsApp.',
   bajada:
     'Hacemos tu página a medida: tus productos con foto y precio, y pedidos que te llegan armados. Sin comisiones, sin cuota mensual y lista en pocos días.',

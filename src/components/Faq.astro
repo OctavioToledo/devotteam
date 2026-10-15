@@ -25,7 +25,7 @@ import Icon from './Icon.astro';
               <Icon name="mas" size={20} class="q__icon" />
             </button>
           </h3>
-          <div class="q__panel" id={`faq-panel-${i}`} role="region" aria-labelledby={`faq-btn-${i}`} hidden>
+          <div class="q__panel" id={`faq-panel-${i}`} role="region" aria-labelledby={`faq-btn-${i}`} hidden="until-found">
             <p>{f.respuesta}</p>
           </div>
         </div>
@@ -97,12 +97,16 @@ import Icon from './Icon.astro';
 </style>
 
 <script>
+  // Cerrado = hidden="until-found": el texto sigue indexable y la búsqueda del navegador lo abre.
   document.querySelectorAll('[data-accordion] .q__btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-      const panel = document.getElementById(btn.getAttribute('aria-controls')!);
-      if (panel) panel.hidden = open;
-    });
+    const panel = document.getElementById(btn.getAttribute('aria-controls')!);
+    if (!panel) return;
+    const setOpen = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      if (open) panel.removeAttribute('hidden');
+      else panel.setAttribute('hidden', 'until-found');
+    };
+    btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+    panel.addEventListener('beforematch', () => setOpen(true));
   });
 </script>

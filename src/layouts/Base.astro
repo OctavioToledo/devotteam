@@ -3,29 +3,102 @@ import '@fontsource-variable/cormorant-garamond/wght.css';
 import '@fontsource-variable/dm-sans/wght.css';
 import '@fontsource/ibm-plex-mono/latin-500.css';
 import '../styles/global.css';
-import { site, contacto, instagramLink } from '../config/site';
+import { site, contacto, instagramLink, waLink } from '../config/site';
+import { hero, planes } from '../data/contenido';
+import { faq } from '../data/faq';
+import { equipo } from '../data/equipo';
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
+const home = new URL('/', Astro.site).href;
+const id = (frag: string) => `${home}#${frag}`;
+// Token de Google Search Console (opcional): variable PUBLIC_GOOGLE_SITE_VERIFICATION en Vercel.
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
+// Datos estructurados para Google: empresa, sitio, página, servicios y preguntas frecuentes. Sin precios.
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: site.name,
-  alternateName: site.firma,
-  description: site.description,
-  url: canonical.href,
-  image: ogImage.href,
-  email: contacto.email,
-  telephone: `+${contacto.whatsapp}`,
-  areaServed: { '@type': 'Country', name: site.pais },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: site.ciudad,
-    addressRegion: site.provincia,
-    addressCountry: 'AR',
-  },
-  sameAs: [contacto.perfilTecnico, instagramLink()].filter(Boolean),
+  '@graph': [
+    {
+      '@type': ['Organization', 'ProfessionalService'],
+      '@id': id('organizacion'),
+      name: site.name,
+      alternateName: site.firma,
+      description: site.description,
+      slogan: hero.titulo,
+      url: home,
+      logo: { '@type': 'ImageObject', url: new URL('/apple-touch-icon.png', Astro.site).href, width: 180, height: 180 },
+      image: ogImage.href,
+      email: contacto.email,
+      telephone: `+${contacto.whatsapp}`,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        telephone: `+${contacto.whatsapp}`,
+        email: contacto.email,
+        url: waLink(),
+        availableLanguage: 'es',
+        areaServed: 'AR',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: site.ciudad,
+        addressRegion: site.provincia,
+        addressCountry: 'AR',
+      },
+      areaServed: [
+        { '@type': 'City', name: site.ciudad },
+        { '@type': 'State', name: site.provincia },
+        { '@type': 'Country', name: site.pais },
+      ],
+      founder: { '@type': 'Person', name: equipo[0].nombre, url: contacto.perfilTecnico },
+      employee: equipo.map((p) => ({ '@type': 'Person', name: p.nombre, jobTitle: p.rol })),
+      knowsAbout: ['Desarrollo web', 'Catálogos online', 'Pedidos por WhatsApp', 'Páginas web para emprendedores'],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Planes de páginas web',
+        itemListElement: planes.items.map((pl) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: `Página web plan ${pl.nombre}`,
+            description: `${pl.resumen} ${pl.incluye.join('. ')}.`,
+            serviceType: 'Diseño y desarrollo de páginas web',
+            provider: { '@id': id('organizacion') },
+          },
+        })),
+      },
+      sameAs: [contacto.perfilTecnico, instagramLink()].filter(Boolean),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': id('sitio'),
+      url: home,
+      name: site.name,
+      inLanguage: 'es-AR',
+      publisher: { '@id': id('organizacion') },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical.href}#pagina`,
+      url: canonical.href,
+      name: site.title,
+      description: site.description,
+      inLanguage: 'es-AR',
+      isPartOf: { '@id': id('sitio') },
+      about: { '@id': id('organizacion') },
+      primaryImageOfPage: ogImage.href,
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': id('preguntas'),
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.pregunta,
+        acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+      })),
+    },
+  ],
 };
 ---
 
@@ -37,7 +110,15 @@ const jsonLd = {
     <title>{site.title}</title>
     <meta name="description" content={site.description} />
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#09234f" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content={site.firma} />
+    <meta name="geo.region" content="AR-M" />
+    <meta name="geo.placename" content={site.ciudad} />
+    <meta name="format-detection" content="telephone=no" />
+    {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+    <meta name="theme-color" content="#09234f" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#060d1a" media="(prefers-color-scheme: dark)" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
@@ -46,6 +127,7 @@ const jsonLd = {
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_AR" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content="Devott · Tu catálogo online, con pedidos directo a tu WhatsApp" />
     <meta property="og:description" content={site.description} />

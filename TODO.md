@@ -25,6 +25,7 @@
 - [ ] Bodega Guerrero y BurgerLand: revisar que "qué necesitaba / qué hicimos" describa bien cada caso.
 
 ## Más adelante
+- [ ] Google Search Console y perfil de Google Business cuando esté el dominio (ver README → SEO).
 - [ ] Testimonios reales (el bloque está listo y desactivado).
 - [ ] Video de presentación (el espacio está listo y oculto).
 - [ ] Reemplazar `public/og.png` si se hace una pieza con fotos reales (1200 × 630).

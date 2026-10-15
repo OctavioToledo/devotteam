@@ -80,6 +80,21 @@ Cuando haya testimonios reales, cargarlos en `testimonios.items` (`src/data/equi
 
 En `src/data/equipo.ts`, cambiar `videoPresentacion` por `{ url: 'https://www.youtube-nocookie.com/embed/ID', titulo: '…' }`.
 
+## SEO
+
+- **Datos estructurados** (`src/layouts/Base.astro`): empresa (servicio profesional en Mendoza, con equipo y contacto), sitio, página, planes como servicios (sin precios) y preguntas frecuentes. Se arman solos desde `src/data/`, así que al editar el contenido se actualizan.
+- **Título y descripción:** `site.title` y `site.description` en `src/config/site.ts`. El título de la portada incluye "Páginas web para emprendedores en Mendoza".
+- **Sitemap y robots:** `/sitemap-index.xml` y `/robots.txt`, con el dominio de `SITE_URL`.
+- **Preguntas frecuentes:** las respuestas cerradas siguen en el HTML (`hidden="until-found"`): Google las lee y la búsqueda del navegador las abre.
+- **Encabezados de seguridad y caché** en `vercel.json`.
+
+### Google Search Console (después de publicar con el dominio final)
+
+1. Entrar a https://search.google.com/search-console y agregar la propiedad con **Prefijo de URL** (ej. `https://devott.com.ar`).
+2. Elegir **Etiqueta HTML**, copiar solo el valor de `content="…"` y cargarlo en Vercel como variable `PUBLIC_GOOGLE_SITE_VERIFICATION`. Hacer *Redeploy* y tocar **Verificar**.
+3. En **Sitemaps**, enviar `sitemap-index.xml`.
+4. Crear el perfil de **Google Business** de Devott en Mendoza con el mismo nombre, teléfono y link. Es lo que más ayuda a aparecer en búsquedas locales.
+
 ## Estructura
 
 ```

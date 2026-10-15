@@ -6,6 +6,6 @@ const site = process.env.SITE_URL ?? 'https://devotteam.vercel.app';
 
 export default defineConfig({
   site,
-  integrations: [sitemap()],
+  integrations: [sitemap({ lastmod: new Date() })],
   build: { inlineStylesheets: 'always' },
 });
