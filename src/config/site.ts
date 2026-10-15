@@ -10,6 +10,8 @@ export const site = {
   title: 'Páginas web para emprendedores en Mendoza | Devott',
   description:
     'Catálogo online con carrito y pedidos que llegan armados a tu WhatsApp. Páginas a medida para emprendedores de Mendoza: sin comisiones, sin cuota mensual.',
+  // Google Search Console, método "Etiqueta HTML": solo el valor de content="…". Vacío = no se agrega.
+  googleVerification: '',
 };
 
 export const contacto = {

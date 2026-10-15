@@ -86,12 +86,13 @@ En `src/data/equipo.ts`, cambiar `videoPresentacion` por `{ url: 'https://www.yo
 - **Preguntas frecuentes:** las respuestas cerradas siguen en el HTML (`hidden="until-found"`): Google las lee y la búsqueda del navegador las abre.
 - **Encabezados de seguridad y caché** en `vercel.json`.
 
-### Google Search Console (después de publicar con el dominio final)
+### Google Search Console
 
-1. Entrar a https://search.google.com/search-console y agregar la propiedad con **Prefijo de URL** (ej. `https://devott.com.ar`).
-2. Elegir **Etiqueta HTML**, copiar solo el valor de `content="…"` y cargarlo en Vercel como variable `PUBLIC_GOOGLE_SITE_VERIFICATION`. Hacer *Redeploy* y tocar **Verificar**.
+1. Entrar a https://search.google.com/search-console y agregar una propiedad de tipo **Prefijo de URL** (no "Dominio": esa pide tocar DNS y no se puede con una dirección `.vercel.app`). Escribir la dirección exacta del sitio, ej. `https://devott.vercel.app`.
+2. Elegir **Etiqueta HTML**, copiar solo el valor de `content="…"` y pegarlo en `googleVerification` (`src/config/site.ts`), o cargarlo en Vercel como `PUBLIC_GOOGLE_SITE_VERIFICATION`. Publicar y tocar **Verificar**.
 3. En **Sitemaps**, enviar `sitemap-index.xml`.
-4. Crear el perfil de **Google Business** de Devott en Mendoza con el mismo nombre, teléfono y link. Es lo que más ayuda a aparecer en búsquedas locales.
+4. Al pasar al dominio propio, agregarlo como propiedad nueva. Con el dominio sí se puede usar el tipo **Dominio** y el registro TXT, en el panel del lugar donde se compró.
+5. Crear el perfil de **Google Business** de Devott en Mendoza con el mismo nombre, teléfono y link. Es lo que más ayuda a aparecer en búsquedas locales.
 
 ## Estructura
 

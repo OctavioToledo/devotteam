@@ -5,7 +5,7 @@
 - [x] WhatsApp: +54 2634 280036 (`5492634280036` en formato wa.me).
 - [x] Correo: equipodevott@gmail.com.
 - [ ] Usuario de Instagram de Devott → `src/config/site.ts` (`instagram`). Mientras esté vacío, no aparece.
-- [ ] Dominio definitivo (se compra en estos días) → variable `SITE_URL` en Vercel (hoy usa `https://devotteam.vercel.app`).
+- [ ] Dominio definitivo (se compra en estos días) → variable `SITE_URL` en Vercel (hoy usa `https://devott.vercel.app`).
 
 ## Fotos
 - [x] Foto del equipo (Octavio y Bianca) → `src/assets/phototeam.jpeg`.

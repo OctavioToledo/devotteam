@@ -12,8 +12,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
 const home = new URL('/', Astro.site).href;
 const id = (frag: string) => `${home}#${frag}`;
-// Token de Google Search Console (opcional): variable PUBLIC_GOOGLE_SITE_VERIFICATION en Vercel.
-const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+// Google Search Console: site.googleVerification, o la variable PUBLIC_GOOGLE_SITE_VERIFICATION en Vercel.
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || site.googleVerification;
 
 // Datos estructurados para Google: empresa, sitio, página, servicios y preguntas frecuentes. Sin precios.
 const jsonLd = {
