@@ -13,10 +13,10 @@ export const site = {
 };
 
 export const contacto = {
-  // Formato wa.me: 549 + característica sin 0 + número sin 15. TODO: verificar.
+  // Formato wa.me: 549 + característica sin 0 + número sin 15 (+54 2634 280036, celular de Octavio).
   whatsapp: '5492634280036',
   whatsappVisible: '2634 280036',
-  email: 'octatoledo7@gmail.com',
+  email: 'equipodevott@gmail.com',
   // TODO: usuario de Instagram de Devott (sin @). Vacío = no se muestra.
   instagram: '',
   perfilTecnico: 'https://octavio-toledo.vercel.app',

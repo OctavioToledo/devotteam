@@ -6,7 +6,13 @@ import { contacto, site } from '../config/site';
 import Logo from './Logo.astro';
 
 const comercial = equipo.filter((p) => p.area === 'comercial').map((p) => p.nombre);
-const texto = nosotros.texto.replace('{comercial}', comercial.join(' y '));
+const textoComercial = comercial.length === 0
+  ? ''
+  : (comercial.length === 1 ? nosotros.textoComercial.una : nosotros.textoComercial.varias).replace(
+      '{nombres}',
+      comercial.join(' y '),
+    );
+const texto = nosotros.texto.replace('{comercial}', textoComercial).trim();
 const iniciales = (n: string) =>
   n.startsWith('[')
     ? '?'

@@ -11,8 +11,9 @@ export type Integrante = {
 
 export const equipo: Integrante[] = [
   { nombre: 'Octavio Toledo', rol: 'Desarrollo full stack', area: 'desarrollo', foto: null },
-  { nombre: '[HERMANA 1]', rol: 'Atención comercial', area: 'comercial', foto: null }, // TODO: nombre y foto
-  { nombre: '[HERMANA 2]', rol: 'Seguimiento de clientes', area: 'comercial', foto: null }, // TODO: nombre y foto
+  { nombre: 'Bianca', rol: 'Atención comercial', area: 'comercial', foto: null }, // TODO: apellido y foto
+  // TODO: nombre de la segunda persona del área comercial; descomentar cuando esté.
+  // { nombre: '', rol: 'Seguimiento de clientes', area: 'comercial', foto: null },
 ];
 
 // Foto grande del bloque Nosotros (Octavio, o Octavio y su hermana). null = recuadro de espera.

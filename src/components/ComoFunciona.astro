@@ -1,6 +1,8 @@
 ---
+import { Picture } from 'astro:assets';
 import { comoFunciona } from '../data/contenido';
 import Icon from './Icon.astro';
+import pedido from '../assets/pedido-whatsapp.png';
 ---
 
 <section class="section section--alt" id="servicio" aria-labelledby="funciona-titulo">
@@ -24,16 +26,21 @@ import Icon from './Icon.astro';
         ))}
       </ol>
 
-      <!-- TODO: reemplazar por una captura real del mensaje que llega a WhatsApp. -->
       <figure class="chat reveal">
         <figcaption class="mono chat__cap">
           {comoFunciona.mensajeEjemplo.titulo}
-          <span>Ejemplo</span>
+          <span>{comoFunciona.mensajeEjemplo.origen}</span>
         </figcaption>
         <div class="chat__body">
-          <div class="chat__bubble">
-            {comoFunciona.mensajeEjemplo.lineas.map((l) => <p>{l}</p>)}
-          </div>
+          <Picture
+            src={pedido}
+            formats={['avif', 'webp']}
+            widths={[371]}
+            sizes="(min-width: 371px) 371px, 100vw"
+            alt={comoFunciona.mensajeEjemplo.alt}
+            loading="lazy"
+            class="chat__img"
+          />
         </div>
       </figure>
     </div>
@@ -129,24 +136,13 @@ import Icon from './Icon.astro';
     background-size: 24px 24px;
   }
 
-  .chat__bubble {
-    max-width: 280px;
-    margin-left: auto;
-    padding: 14px 16px;
-    background: #dcf8c6;
-    color: #111b21;
-    border-radius: var(--radius);
-    font-size: 0.9375rem;
-    line-height: 1.45;
-  }
-
-  .chat__bubble p:first-child {
-    margin-bottom: 6px;
-  }
-
-  .chat__bubble p:nth-last-child(2) {
-    margin-top: 6px;
-    font-weight: 600;
+  .chat__body :global(.chat__img) {
+    display: block;
+    width: 100%;
+    max-width: 371px;
+    height: auto;
+    margin-inline: auto;
+    border: 1px solid var(--rule-strong);
   }
 
   @media (min-width: 900px) {

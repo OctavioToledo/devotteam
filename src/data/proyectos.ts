@@ -33,7 +33,7 @@ export const proyectos: Proyecto[] = [
     necesidad: 'Un menú claro desde el celular, para que el cliente pida sin preguntar precio por precio.', // TODO: confirmar con el cliente
     solucion: 'Menú con categorías, carrito con total y pedido que llega armado al WhatsApp del local, con aviso de abierto o cerrado.',
     funciones: ['Menú por categorías', 'Carrito', 'Pedido por WhatsApp', 'Horarios'],
-    demo: null, // TODO: link a la demo publicada de Verto's
+    demo: 'https://vertos.vercel.app',
     capturas: { mobile: vertosMobile, desktop: vertosDesktop },
     enTrabajos: true,
   },
@@ -55,7 +55,7 @@ export const proyectos: Proyecto[] = [
     necesidad: 'Un menú donde cada hamburguesa tiene opciones (punto de la carne) y extras que cambian el precio.',
     solucion: 'Menú con opciones y extras por producto, buscador, horarios, costo de envío y checkout que arma el pedido completo.',
     funciones: ['Opciones y extras', 'Buscador', 'Envío y retiro', 'Pedido por WhatsApp'],
-    demo: null, // TODO: link a la demo publicada de BurgerLand
+    demo: 'https://burguer-land.octatoledo7.workers.dev',
     capturas: { mobile: burgerMobile, desktop: burgerDesktop },
     enTrabajos: true,
   },

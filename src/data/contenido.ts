@@ -33,7 +33,8 @@ export const comoFunciona = {
   // Ejemplo ilustrativo del formato del mensaje. TODO: reemplazar por una captura real.
   mensajeEjemplo: {
     titulo: 'Así llega el pedido',
-    lineas: ['Hola! Quiero hacer este pedido:', '2 × Producto A', '1 × Producto B', 'Total: $ —', 'Retiro en el local'],
+    origen: "Pedido real · Verto's",
+    alt: "Captura de WhatsApp: pedido a Verto's con dos panchos, aclaración sin mostaza, total de 11.000 pesos, nombre, entrega take away y pago por transferencia.",
   },
 };
 
@@ -133,9 +134,13 @@ export const despues = {
 export const nosotros = {
   etiqueta: 'Nosotros',
   titulo: 'Hablás directo con quienes hacen tu página.',
-  // [HERMANA 1] y [HERMANA 2] se reemplazan con los nombres de equipo.ts.
+  // {comercial} se reemplaza por textoComercial, con los nombres del área comercial de equipo.ts.
   texto:
-    'Devott es un equipo chico de Mendoza. Octavio programa cada página a medida, sin plantillas genéricas ni plataformas que cobran por mes. {comercial} te atienden, te asesoran y acompañan tu proyecto de principio a fin.',
+    'Devott es un equipo chico de Mendoza. Octavio programa cada página a medida, sin plantillas genéricas ni plataformas que cobran por mes. {comercial}',
+  textoComercial: {
+    una: '{nombres} te atiende, te asesora y acompaña tu proyecto de principio a fin.',
+    varias: '{nombres} te atienden, te asesoran y acompañan tu proyecto de principio a fin.',
+  },
   cita: 'Cada página la programamos nosotros, para un negocio real, con nombre y apellido.',
   perfilTecnico: 'Conocé el perfil técnico de Octavio',
 };

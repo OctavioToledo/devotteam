@@ -1,20 +1,23 @@
 # Lo que falta que provea Octavio
 
 ## Datos
-- [ ] Nombres de las dos personas del área comercial → `src/data/equipo.ts` (hoy dice `[HERMANA 1]` y `[HERMANA 2]`).
-- [ ] Verificar el número de WhatsApp en formato wa.me (`5492634280036`) → `src/config/site.ts`.
+- [x] Bianca, área comercial.
+- [ ] Apellido de Bianca y nombre de la segunda persona del área comercial → `src/data/equipo.ts` (está comentada; al descomentarla, el texto pasa a plural solo).
+- [x] WhatsApp: +54 2634 280036 (`5492634280036` en formato wa.me).
+- [x] Correo: equipodevott@gmail.com.
 - [ ] Usuario de Instagram de Devott → `src/config/site.ts` (`instagram`). Mientras esté vacío, no aparece.
 - [ ] Dominio definitivo → variable `SITE_URL` en Vercel (hoy usa `https://devotteam.vercel.app`).
 
 ## Fotos
 - [ ] Foto del equipo para el bloque Nosotros (Octavio, o Octavio y su hermana), vertical 4:5.
 - [ ] Fotos individuales de cada integrante (opcional, cuadradas).
-- [ ] Captura real de un mensaje de pedido llegando a WhatsApp, para reemplazar el ejemplo de "Cómo funciona".
+- [x] Captura real de un pedido en WhatsApp (Verto's) → `src/assets/pedido-whatsapp.png`.
+- [ ] Rehacer esa captura: el emoji del primer renglón llega roto (`�`). Revisar la codificación del mensaje en Verto's.
 - [ ] Capturas del marketplace de vehículos cuando haya una versión para mostrar.
 
 ## Links de demo
-- [ ] Verto's → `demo` en `src/data/proyectos.ts`.
-- [ ] BurgerLand → `demo` en `src/data/proyectos.ts`.
+- [x] Verto's: https://vertos.vercel.app
+- [x] BurgerLand: https://burguer-land.octatoledo7.workers.dev
 - [x] Bodega Guerrero: https://bodega-guerrero.octatoledo7.workers.dev
 
 ## Textos a confirmar
