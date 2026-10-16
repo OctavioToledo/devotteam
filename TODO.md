@@ -5,7 +5,7 @@
 - [x] WhatsApp: +54 2634 280036 (`5492634280036` en formato wa.me).
 - [x] Correo: equipodevott@gmail.com.
 - [ ] Usuario de Instagram de Devott → `src/config/site.ts` (`instagram`). Mientras esté vacío, no aparece.
-- [ ] Dominio definitivo (se compra en estos días) → variable `SITE_URL` en Vercel (hoy usa `https://devott.vercel.app`).
+- [x] Dominio: https://devott.com.ar (NIC.ar, delegado a Vercel; `SITE_URL` cargada).
 
 ## Fotos
 - [x] Foto del equipo (Octavio y Bianca) → `src/assets/phototeam.jpeg`.
@@ -23,7 +23,8 @@
 - [ ] Bodega Guerrero y BurgerLand: revisar que "qué necesitaba / qué hicimos" describa bien cada caso.
 
 ## Más adelante
-- [ ] Google Search Console y perfil de Google Business cuando esté el dominio (ver README → SEO).
+- [x] Google Search Console: propiedad de dominio `devott.com.ar` (registro TXT en Vercel DNS).
+- [ ] Perfil de Google Business de Devott en Mendoza.
 - [ ] Testimonios reales (el bloque está listo y desactivado).
 - [ ] Video de presentación (el espacio está listo y oculto).
 - [ ] Reemplazar `public/og.png` si se hace una pieza con fotos reales (1200 × 630).
