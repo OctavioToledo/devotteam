@@ -22,6 +22,8 @@ export const contacto = {
   // TODO: usuario de Instagram de Devott (sin @). Vacío = no se muestra.
   instagram: '',
   perfilTecnico: 'https://octavio-toledo.vercel.app',
+  // Perfil de Google Business (link de "Compartir perfil"). Se usa en los datos estructurados.
+  googleBusiness: 'https://share.google/9mthU92HavHlGijLw',
 };
 
 export const mensajes = {
