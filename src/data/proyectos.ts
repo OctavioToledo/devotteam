@@ -11,6 +11,8 @@ import burgerMobile from '../assets/proyectos/burgerland-mobile.png';
 import burgerDesktop from '../assets/proyectos/burgerland-desktop.png';
 import milcaMobile from '../assets/proyectos/milca-jewelry-mobile.png';
 import milcaDesktop from '../assets/proyectos/milca-jewelry-desktop.png';
+import gtMobile from '../assets/proyectos/gerardo-tello-mobile.png';
+import gtDesktop from '../assets/proyectos/gerardo-tello-desktop.png';
 
 export type Proyecto = {
   nombre: string;
@@ -70,6 +72,17 @@ export const proyectos: Proyecto[] = [
     funciones: ['Catálogo con fichas', 'Variantes por pieza', 'Guía de talles', 'Pedido por WhatsApp'],
     demo: 'https://milcajewelry.octatoledo7.workers.dev',
     capturas: { mobile: milcaMobile, desktop: milcaDesktop },
+    enTrabajos: true,
+  },
+  {
+    nombre: 'Gerardo Tello Inmobiliaria',
+    rubro: 'Inmobiliaria · San Martín, Mendoza',
+    estado: 'publicado',
+    necesidad: 'Dejar la plantilla de Wasi por un sitio rápido en el celular, con el precio a la vista y la consulta directa por WhatsApp.',
+    solucion: 'Selector alquilar o comprar, listado con filtros, ficha con galería y mapa, y consulta por WhatsApp con la propiedad ya indicada.',
+    funciones: ['Alquiler y venta', 'Filtros', 'Ficha con galería', 'Consulta por WhatsApp'],
+    demo: 'https://inmobiliariagt.octatoledo7.workers.dev',
+    capturas: { mobile: gtMobile, desktop: gtDesktop },
     enTrabajos: true,
   },
   {
