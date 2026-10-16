@@ -24,7 +24,8 @@
 
 ## Más adelante
 - [x] Google Search Console: propiedad de dominio `devott.com.ar` (registro TXT en Vercel DNS).
-- [ ] Perfil de Google Business de Devott en Mendoza.
+- [x] Perfil de Google Business creado.
+- [ ] Link público del perfil de Google Business → sumarlo a `sameAs` en los datos estructurados.
 - [ ] Testimonios reales (el bloque está listo y desactivado).
 - [ ] Video de presentación (el espacio está listo y oculto).
 - [ ] Reemplazar `public/og.png` si se hace una pieza con fotos reales (1200 × 630).
