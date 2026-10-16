@@ -9,6 +9,8 @@ import bodegaMobile from '../assets/proyectos/bodega-guerrero-mobile.png';
 import bodegaDesktop from '../assets/proyectos/bodega-guerrero-desktop.png';
 import burgerMobile from '../assets/proyectos/burgerland-mobile.png';
 import burgerDesktop from '../assets/proyectos/burgerland-desktop.png';
+import milcaMobile from '../assets/proyectos/milca-jewelry-mobile.png';
+import milcaDesktop from '../assets/proyectos/milca-jewelry-desktop.png';
 
 export type Proyecto = {
   nombre: string;
@@ -57,6 +59,17 @@ export const proyectos: Proyecto[] = [
     funciones: ['Opciones y extras', 'Buscador', 'Envío y retiro', 'Pedido por WhatsApp'],
     demo: 'https://burguer-land.octatoledo7.workers.dev',
     capturas: { mobile: burgerMobile, desktop: burgerDesktop },
+    enTrabajos: true,
+  },
+  {
+    nombre: 'Milca Jewelry',
+    rubro: 'Joyería · Acero con baño de oro',
+    estado: 'modelo',
+    necesidad: 'Dejar Tiendanube y vender desde un catálogo propio, más simple, donde cada pieza tiene talle, largo o baño.',
+    solucion: 'Catálogo con fichas y galería de fotos, elección de variantes, guía de talles y carrito que arma el pedido con opción regalo.',
+    funciones: ['Catálogo con fichas', 'Variantes por pieza', 'Guía de talles', 'Pedido por WhatsApp'],
+    demo: 'https://milcajewelry.octatoledo7.workers.dev',
+    capturas: { mobile: milcaMobile, desktop: milcaDesktop },
     enTrabajos: true,
   },
   {
